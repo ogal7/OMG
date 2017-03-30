@@ -1,19 +1,59 @@
 import airlines
 
-
-totalsList = []
-delaysList = []
+##lists of dictionaries
 
 list_of_airline = airlines.get_reports()
 
 
 
-    #{'airport': {'code': 'ATL', 'name': 'Atlanta, GA: Hartsfield-Jackson Atlanta International'}, 
+#{
+#	'airport': [code, name]
+#	'stats': total
+#}
+
+def totalsList():
+	for i in range(20):
+		totalsList = []
+		for item in list_of_airline:
+			dic = {}
+			for key in item:#each item is a dict
+				if key == "airport":
+					dic['airport'] = [item[key]['code'], item[key]['name']]
+				if key == "statistics":
+					dic['stats'] = item[key]['flights']['total']
+			totalsList.append(dic)
+	return totalsList
+
+
+
+
+def delaysList():
+	for i in range(20):
+		delaysList = []
+		for item in list_of_airline:
+			dic = {}
+			for key in item:#each item is a dict
+				if key == "airport":
+					dic['airport'] = [item[key]['code'], item[key]['name']]
+				if key == "statistics":
+				#print
+					dic['stats'] = float(   int(item[key]['flights']['delayed']) / int(item[key]['flights']['total']))
+			delaysList.append(dic)
+	return delaysList
+
+
+
+print totalsList()
+#print delaysList()
+    
+    #{
+    #'airport': {'code': 'ATL', 'name': 'Atlanta, GA: Hartsfield-Jackson Atlanta International'}, 
     #'statistics': {'flights': {'cancelled': 5, 'on time': 561, 'total': 752, 'delayed': 186, 'diverted': 0}, 
     #'# of delays': {'late aircraft': 18, 'security': 2, 'weather': 28, 'national aviation system': 105, 'carrier': 34}, 'minutes delayed': 
     #{'late aircraft': 1269, 'weather': 1722, 'carrier': 1367, 
     #'security': 139, 'total': 8314, 'national aviation system': 3817}}, 'time': {'month': 6, 'label': '2003/6', 'year': 2003}, 
-    #'carrier': {'code': 'AA', 'name': 'American Airlines Inc.'}}, 
+    #'carrier': {'code': 'AA', 'name': 'American Airlines Inc.'}
+    #}, 
 
 	#{'airport': {'code': 'BOS', 'name': 'Boston, MA: Logan International'}, 'statistics': {'flights': 
 	#{'cancelled': 7, 'on time': 1034, 'total': 1266, 'delayed': 225, 'diverted': 0},
