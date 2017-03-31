@@ -4,6 +4,20 @@ import airlines
 
 list_of_airline = airlines.get_reports()
 
+#for i in range(len(list_of_airline)):
+#	print str(i )+ str(list_of_airline[i]) + "\n"
+list_of_codes = ['ORD', 'LAX', 'ATL', 'JFK', 'DFW', 'LAS', 'SFO', 'DEN', 'EWR', 'FLL', 'LGA', 'MSP', 'PHX', 'IAH', 'MIA', 'SEA', 'CLT', 'PHL', 'BOS', 'PDX', 'SLC', 'MCO', 'DTW', 'TPA', 'IAD', 'MEM', 'BWI', 'MDW']
+finalList = [{'ORD':[]}, {'LAX':[]}, {'ATL':[]}, {'JFK':[]}, {'DFW'[]}, {'LAS'[]}, {'SFO'[]}, {'DEN':[]}, {'EWR':[]}, {'FLL':[]}, {'LGA':[]}, {'MSP':[]}, {'PHX':[]}, {'IAH':[]}, {'MIA':[]}, {'SEA':[]}, {'CLT':[]}, {'PHL':[]}, {'BOS':[]}, {'PDX':[]}, {'SLC':[]}, {'MCO':[]}, {'DTW':[]}, {'TPA':[]}, {'IAD':[]}, {'MEM':[]}, {'BWI':[]}, {'MDW':[]}]
+
+
+
+for thing in list_of_airline:
+	if thing['airport']['code'] in list_of_codes:
+		
+
+
+
+
 
 
 #{
@@ -12,9 +26,8 @@ list_of_airline = airlines.get_reports()
 #}
 
 def totalsList():
-	for i in range(20):
-		totalsList = []
-		for item in list_of_airline:
+	totalsList = []
+	for item in list_of_airline:
 			dic = {}
 			for key in item:#each item is a dict
 				if key == "airport":
@@ -22,6 +35,11 @@ def totalsList():
 				if key == "statistics":
 					dic['stats'] = item[key]['flights']['total']
 			totalsList.append(dic)
+
+	for x in totalsList:
+		if x['stats'] < 250:
+			totalsList.remove(x)
+	
 	return totalsList
 
 
@@ -43,7 +61,7 @@ def delaysList():
 
 
 
-print totalsList()
+#print totalsList()
 #print delaysList()
     
     #{
