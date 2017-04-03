@@ -11,6 +11,7 @@
 //link circles with their airport data
 //create bar graph with d3
 
+
 var totalscontainer = document.getElementById("totals");
 var delayscontainer = document.getElementById("delays");
 var reqId;
