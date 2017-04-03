@@ -12,31 +12,47 @@
     <!-- 2 bootstrap things we're using -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
     <!-- a place for all of your regular css stuff -->
 	<script src="app.js"></script>
+
+	<!--<style>
+	div.flights{
+		text-align: center;
+	}
+	div.delays{
+		text-align: center;
+	}
+	.div{
+		margin:4em;
+	}
+
+	</style> -->
+
 </head>
 
 <body>
+	<div id="flights">
 	<center>
-		<br>
-		<br>
 		Total Flights<br>
 	<svg id="totals" height="420px" width="650" style="border:1px solid;" xmlns="http://www.w3.org/2000/svg">
 	  <image href="../images/map.jpg" height="100%" width="100%"/>
 	</svg>
+	</div>
 
+
+<div>
 	<br>
-	<br>
-	<br>
-	<br>
-	
+	<input type="range" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/>
+</div>
+
+	<div id="delays">
+		<center>
 	Delays<br>
 	<svg id="delays" height="420px" width="650" style="border:1px solid;" xmlns="http://www.w3.org/2000/svg">
 	  <image href="../images/map.jpg" height="100%" width="100%"/>
 	</svg>
 	</center>
+</div>
 </body>
 
 </html>

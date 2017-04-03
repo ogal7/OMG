@@ -49,3 +49,39 @@ var clear = function() {
 	}
 }
 */
+
+/*use json to get data from python
+cancelled = 
+ontime=
+delayed=
+diverted=
+*/
+
+var dyn = d3.select("#totalsdynamic");
+			var info = [             
+						[ 'cancelled'],
+						[ 'on time'],
+						[ 'delayed'], 
+						[ 'diverted']
+					]
+			dyn.selectAll("div")
+			.data(info)
+			.style("width", function(d) { return parseInt(d[0]) *80 + "px"})
+			.text(function(d) { return d[1]})
+			.enter();
+
+/*another js file for delays
+var dyn = d3.select("#delaysdynamic");
+			var info = [             
+						[ 'lateaircraft'],
+						[ 'security'],
+						[ 'weather'], 
+						[ 'national aviation system']
+						[ 'carrier']
+					]
+			dyn.selectAll("div")
+			.data(info)
+			.style("width", function(d) { return parseInt(d[0]) *80 + "px"})
+			.text(function(d) { return d[1]})
+			.enter();
+			*/
