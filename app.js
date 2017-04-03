@@ -17,7 +17,6 @@ var reqId;
 
 /*
 var change = function(e) {
-	console.log("haha");
 	if (this.getAttribute("fill") == "pink") {
 		container.removeChild(this);
 		var c = createCircle(Math.random()*500,Math.random()*500);	
@@ -50,20 +49,29 @@ var clear = function() {
 }
 */
 
-/*use json to get data from python
-cancelled = 
-ontime=
-delayed=
-diverted=
+/*use ajax to get data from python
+
+
 */
+
+var getTotals = function(airport,month,year){
+    //for thing in finallist{
+    //if finallist[apName] == airport &&
+    //finalllist[month] == month ...
+    //
+    return totals
+}
 
 var dyn = d3.select("#totalsdynamic");
 			var info = [             
-						[ 'cancelled'],
-						[ 'on time'],
-						[ 'delayed'], 
-						[ 'diverted']
-					]
+			    [ 'American Airlines Inc.']//[airline,totals]
+			    ['Delta Air Lines Inc.']
+			    ['Southwest Airlines Co.']
+			    ['United Air Lines Inc.']
+			    ['Alaska Airlines Inc.'] 
+			    ['JetBlue Airways']
+			    ['Spirit Air Lines']
+			]
 			dyn.selectAll("div")
 			.data(info)
 			.style("width", function(d) { return parseInt(d[0]) *80 + "px"})
