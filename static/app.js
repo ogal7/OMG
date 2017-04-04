@@ -12,7 +12,8 @@
 //link circles with their airport data
 //create bar graph with d3
 
-
+var totals=[];
+var delays=[];
 var totalscontainer = document.getElementById("totals");
 var delayscontainer = document.getElementById("delays");
 var reqId,month,year,airport;
@@ -54,6 +55,49 @@ var change = function(e) {
 	}	
 }
 */
+var loadDoc = function() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+	var list = JSON.parse(this.responseText);
+	console.log(list[0]);
+	totals=getTotal(list);
+	delays=getDelays(list);
+    };
+  };
+  xhttp.open("GET", "http://127.0.0.1:5000/list/", true);
+  xhttp.send();
+};
+
+var getTotal=function(list, month, year){
+    var totals=[0,0,0,0,0,0,0,0,0];
+    var airports=['ORD','LAX','JFK', 'ATL','DFW','LAS','SFO','DEN','EWR' ];
+    var i=0;
+    while(i<totals.len){
+	var j=0;
+	while(j<list[airports[i]].len){
+	    if(month==list[airports[i]][3]&&year=list[airports[i]][4]){
+		totals[i]+=list[airports[i]][2];
+	    };
+	};
+    };
+    return totals;
+};
+
+var getDelays=function(list, month, year){
+    var delays=[0,0,0,0,0,0,0,0,0];
+    var airports=['ORD','LAX','JFK', 'ATL','DFW','LAS','SFO','DEN','EWR' ];
+    var i=0;
+    while(i<totals.len){
+	var j=0;
+	while(j<list[airports[i]].len){
+	    if(month==list[airports[i]][3]&&year==list[airports[i]][4]){
+		totals[i]+=list[airports[i]][1];
+	    };
+	};
+    };
+    return delays;
+};
 
 var createCircle = function (x,y,r) {
 	var c =	document.createElementNS("http://www.w3.org/2000/svg", "circle");
