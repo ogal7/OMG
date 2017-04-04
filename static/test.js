@@ -7,7 +7,7 @@ var loadDoc = function() {
     if (this.readyState == 4 && this.status == 200) {
 	var list = JSON.parse(this.responseText);
 	console.log(list[0]);
-//	totals=getTotal(list,'11','2005');
+	totals=getTotal(list,'11','2012');
 //	delays=getDelays(list,'11','2005');
 	console.log(totals[0]);
     };
@@ -20,14 +20,12 @@ var getTotal = function(list, month, year){
     var total=[0,0,0,0,0,0,0,0,0];
     var airports=['ORD','LAX','ATL', 'JFK','DFW','LAS','SFO','DEN','EWR' ];
     var i=0;
-    console.log(list[0][airports[0]]);
-    while(i<totals.length){
+    while(i<list.length){
 	var j=0;
 	while(j<list[i][airports[i]].length){
-	    console.log(list[i][airports[i]]);
+	    console.log(list[i][airports[i]][j]);
 	    if(month==list[i][airports[i]][j][3]&&year==list[i][airports[i]][j][4]){
 		total[i]+=list[i][airports[i]][j][2];
-		console.log(hi);
 	    };
 	    j+=1
 	};
@@ -44,8 +42,8 @@ var getDelays=function(list, month, year){
     while(i<totals.length){
 	var j=0;
 	while(j<list[i][airports[i]].length){
-	    if(month==list[i][airports[i]][3]&&year==list[i][airports[i]][4]){
-		delay[i]+=list[airports[i]][1];
+	    if(month==list[i][airports[i]][j][3]&&year==list[i][airports[i]][j][4]){
+		delay[i]+=list[airports[i]][j][1];
 	    };
 	    j+=1
 	};
