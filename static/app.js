@@ -16,25 +16,22 @@ var totals=[];
 var delays=[];
 var totalscontainer = document.getElementById("totals");
 var delayscontainer = document.getElementById("delays");
-var reqId,month,year,airport;
+var reqId,tmonth,tyear,,dyear,dmonth,airport;
 var tyearslider = document.getElementById("tyear")
 var tmonthslider = document.getElementById("tmonth")
 //var dyearslider = document.getElementById("dyear")
 //var dmonthslider = document.getElementById("dmonth")
-var tyearinput = document.getElementById("tyear");
-var tmonthinput = document.getElementById("tmonth");
-
+//var tyearinput = document.getElementById("tyear");
+//var tmonthinput = document.getElementById("tmonth");
 var tyearval = document.getElementById("tyearval");
 var tmonthval = document.getElementById("tmonthval");
 
 
 var update = function(slideAmount){
+	tmonthval.innerHTML = tmonthslider.value;
 	tyearval.innerHTML = tyearslider.value;
 }
 
-var update2 = function(slideAmount){
-	tmonthval.innerHTML = tmonthslider.value;
-}
 
 
 tyearinput.addEventListener("onmousedown",update);
@@ -108,6 +105,9 @@ var createCircle = function (x,y,r) {
     //c.addEventListener("click", change);   //change to redirect to graphs
     return c;
 }
+
+d3.selectAll("circle").on("click", function(){ window.location.href="/totals/"}
+
 /* 
 var clear = function() {
 	var list = document.getElementsByTagName("circle");
