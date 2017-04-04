@@ -21,14 +21,25 @@ var tmonthslider = document.getElementById("tmonth")
 //var dyearslider = document.getElementById("dyear")
 //var dmonthslider = document.getElementById("dmonth")
 var tyearinput = document.getElementById("tyear");
+var tmonthinput = document.getElementById("tmonth");
+
 var tyearval = document.getElementById("tyearval");
+var tmonthval = document.getElementById("tmonthval");
+
+
+var update = function(slideAmount){
+	tyearval.innerHTML = tyearslider.value;
+}
+
+var update2 = function(slideAmount){
+	tmonthval.innerHTML = tmonthslider.value;
+}
 
 
 tyearinput.addEventListener("onmousedown",update);
+tmonthinput.addEventListener("onmousedown",update2);
 
-var update = function(){
-	tyearval.innerHTML = tyearslider.value;
-	}
+
 /*
 var change = function(e) {
 	if (this.getAttribute("fill") == "pink") {
