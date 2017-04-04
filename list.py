@@ -1,5 +1,16 @@
 import airlines
 import json
+import sqlite3   #enable control of an sqlite database
+import csv       #facilitates CSV I/O
+
+
+f="mileHigh.db"
+#created = True# gives an error if you try to make the same table twice
+db = sqlite3.connect(f) #open if f exists, otherwise create
+c = db.cursor()    #facilitate db ops
+
+
+
 ##lists of dictionaries
 list_of_airline = airlines.get_reports()
 
@@ -44,8 +55,6 @@ def getCoord(code):
 	y = 180
     return [x,y]
 
-
-
 #{'
 # { airport': {'code': 'DFW', 'name': 'Dallas/Fort Worth, TX: Dallas/Fort Worth International'}, 
 #'statistics': {'flights': 
@@ -58,6 +67,9 @@ def getCoord(code):
 # 'time': {'month': 9, 'label': '2012/9', 'year': 2012},
 # 'carrier': {'code': 'AA', 'name': 'American Airlines Inc.'}
 #}
+
+#q = "CREATE TABLE airlineData (code TEXT, airportName TEXT, delays INTEGER, total INTEGER, month INTEGER, year INTEGER, airline TEXT, xcor INTEGER, ycor INTEGER)"
+#c.execute(q)
 
 for thing in list_of_airline:
 	if thing['airport']['code'] in list_of_codes:
@@ -72,9 +84,33 @@ for thing in list_of_airline:
 		numYear = int(year)
 		carrier =thing['carrier']['name']
 		if (carrier in list_of_airlines) and (numYear >= 2011 and numYear <= 2016):
-			finalList[i][code].append([apName,delayed,total,month,year,carrier, coordinates])
+			finalList[i][code].append([code, apName,delayed,total,month,year,carrier, coordinates])
+			#command = "INSERT INTO airlineData VALUES('%s','%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"%(code, apName, delayed, total, month, year, carrier, coordinates[0], coordinates[1])
+			#c.execute(command)
+
+
+
+for dic in finalList:
+	for key in dic:
+		item = dic[key]
+		c.executemany("INSERT INTO airlineData VALUES('%s','%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"%(item[0], item[1], item[2], item[3], item[4], item[5], item[6], item[7][0], item[7][1]), item)
+
+
+#==========================================================
+#INSERT YOUR POPULATE CODE IN THIS ZONE
+#...perhaps by beginning with these examples...
+##q = "CREATE TABLE students (name TEXT, id INTEGER)"
+#c.execute(q)    #run SQL query
+
+#insert = "INSERT INTO users2 VALUES ('%s', '%s', '%s', '%s')"%(fn, ln, usern, hashOG(unhashedp))
+#['Chicago, IL: Chicago Midway International', 1360, 5844, 1, 2011, 'Southwest Airlines Co.']
+
+    #run SQL query
+
+db.commit() #save changes
+db.close()  #close database
 
 
 
 
-return json.dumps(finalList)
+#return json.dumps(finalList)
