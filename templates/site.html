@@ -3,20 +3,6 @@
 
 <head>
 	<title>Airlines</title>
-	<!-- use utf-8 chars -->
-    <meta charset="utf-8">
-    <!-- look pretty on mobile -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- main bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- 2 bootstrap things we're using -->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="/static/test.js"></script>
-    <script src="/static/app.js"></script>
-    <!-- a place for all of your regular css stuff -->
-	
 	<!--<style>
 	div.flights{
 		text-align: center;
@@ -27,45 +13,43 @@
 	.div{
 		margin:4em;
 	}
-
 	</style> -->
-
 </head>
-
 <body>
-	<div id="flights">
 	<center>
 		Total Flights<br>
 	<svg id="totals" height="420px" width="650" style="border:1px solid;" xmlns="http://www.w3.org/2000/svg">
 	  <image href="/static/map.jpg" height="100%" width="100%"/>
 	</svg>
-	</div>
 
 
-<div class="row">
-  <div class="small-10 columns">
-    <div class="range-slider" data-slider data-options="display_selector: #totalsyear; initial: 2000;">
-      <span class="range-slider-handle" role="slider" tabindex="0"></span>
-      <span class="range-slider-active-segment"></span>
-    </div>
-  </div>
-  <div class="small-2 columns">
-    <input type="number" id="totalsyear" value="28" />
-  </div>
-</div>
+<br>
+<input type="range" id="tmonth" value="6" min="1" max="12" step="1">Month<br>
+<p id="tmonthval"></p>
+<input type="range" id="tyear" value="2001" min="2000" max="2005" step="1">Year<br>
+<p id="tyearval"></p>
+<!--
+<p id="tyearval"></p>
+<br>
+    Year<input type="number" id="tyear" value="2000" min="2000" max="2005" step="1"/><br>
+    Month<input type="number" id="tmonth" value="1" min="1" max="12" step="1"/>
 
 <div>
   <input id="totalsbutton" type="range" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/>
 </div>
-
-	<div id="delays">
+-->
 		<center>
 	Delays<br>
 	<svg id="delays" height="420px" width="650" style="border:1px solid;" xmlns="http://www.w3.org/2000/svg">
 	  <image href="/static/map.jpg" height="100%" width="100%"/>
 	</svg>
 	</center>
-</div>
+
+	<input type="range" id="delaysmonth" value="1">Month<br>
+<input type="range" id="delaysyear" value="2000" min="2000" max="2005" step="1" type="int">Year<br>
 </body>
+
+    <script src="/static/test.js"></script>
+    <script src="/static/app.js"></script>
 
 </html>

@@ -15,8 +15,20 @@
 
 var totalscontainer = document.getElementById("totals");
 var delayscontainer = document.getElementById("delays");
-var reqId,month,year;
+var reqId,month,year,airport;
+var tyearslider = document.getElementById("tyear")
+var tmonthslider = document.getElementById("tmonth")
+//var dyearslider = document.getElementById("dyear")
+//var dmonthslider = document.getElementById("dmonth")
+var tyearinput = document.getElementById("tyear");
+var tyearval = document.getElementById("tyearval");
 
+
+tyearinput.addEventListener("onmousedown",update);
+
+var update = function(){
+	tyearval.innerHTML = tyearslider.value;
+	}
 /*
 var change = function(e) {
 	if (this.getAttribute("fill") == "pink") {
@@ -41,9 +53,6 @@ var createCircle = function (x,y,r) {
     //c.addEventListener("click", change);   //change to redirect to graphs
     return c;
 }
-
-createCircle(300,300,25);
-
 /* 
 var clear = function() {
 	var list = document.getElementsByTagName("circle");
@@ -55,34 +64,32 @@ var clear = function() {
 
 /*use ajax to get data from python
 
-
-*/
-
-var getTotals = function(airport,month,year){
+var getTotals = function(airline){
     //for thing in finallist{
-    //if finallist[apName] == airport &&
-    //finalllist[month] == month ...
-    //
-    return totals
+    //if (finallist[apName] == airport &&         //airport, month, year are global variables         
+   	//finallist[airline] == airport &&
+    //finalllist[month] == month &&
+    //finallist[year] == year) return totals;
+	return -1;
 }
 
 var dyn = d3.select("#totalsdynamic");
 			var info = [             
-			    [ 'American Airlines Inc.']//[airline,totals]
-			    ['Delta Air Lines Inc.']
-			    ['Southwest Airlines Co.']
-			    ['United Air Lines Inc.']
-			    ['Alaska Airlines Inc.'] 
-			    ['JetBlue Airways']
-			    ['Spirit Air Lines']
+			    [ 'American Airlines Inc.', getTotals(airline,month,year)]//[airline,totals]
+			    ['Delta Air Lines Inc.', getTotals(airline,month,year)]
+			    ['Southwest Airlines Co.', getTotals(airline,month,year)]
+			    ['United Air Lines Inc.', getTotals(airline,month,year)]
+			    ['Alaska Airlines Inc.', getTotals(airline,month,year)] 
+			    ['JetBlue Airways', getTotals(airline,month,year)]
+			    ['Spirit Air Lines', getTotals(airline,month,year)]
 			]
 			dyn.selectAll("div")
 			.data(info)
-			.style("width", function(d) { return parseInt(d[0]) *80 + "px"})
-			.text(function(d) { return d[1]})
+			.style("width", function(d) { return parseInt(d[1]) *80 + "px"})
+			.text(function(d) { return d[0]})
 			.enter();
 
-/*another js file for delays
+another js file for delays
 var dyn = d3.select("#delaysdynamic");
 			var info = [             
 						[ 'lateaircraft'],
@@ -97,3 +104,6 @@ var dyn = d3.select("#delaysdynamic");
 			.text(function(d) { return d[1]})
 			.enter();
 			*/
+window.onload = function(){
+	update();
+}
