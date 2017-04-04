@@ -6,9 +6,9 @@ var loadDoc = function() {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
 	var list = JSON.parse(this.responseText);
-	console.log(list[8]);
-	totals=getTotal(list);
-	delays=getDelays(list);
+	console.log(list[0]);
+//	totals=getTotal(list,'11','2005');
+//	delays=getDelays(list,'11','2005');
 	console.log(totals[0]);
     };
   };
@@ -17,34 +17,40 @@ var loadDoc = function() {
 };
 
 var getTotal = function(list, month, year){
-    var totals=[0,0,0,0,0,0,0,0,0];
+    var total=[0,0,0,0,0,0,0,0,0];
     var airports=['ORD','LAX','ATL', 'JFK','DFW','LAS','SFO','DEN','EWR' ];
     var i=0;
-    while(i<totals.len){
+    console.log(list[0][airports[0]]);
+    while(i<totals.length){
 	var j=0;
-	while(j<list[i][airports[i]].len){
-	    if(month==list[i][airports[i]][3]&&year==list[i][airports[i]][4]){
-		totals[i]+=list[i][airports[i]][2];
+	while(j<list[i][airports[i]].length){
+	    console.log(list[i][airports[i]]);
+	    if(month==list[i][airports[i]][j][3]&&year==list[i][airports[i]][j][4]){
+		total[i]+=list[i][airports[i]][j][2];
+		console.log(hi);
 	    };
+	    j+=1
 	};
+	i+=1;
     };
-    return totals;
+    console.log(total[0]);
+    return total;
 };
 
 var getDelays=function(list, month, year){
-    var delays=[0,0,0,0,0,0,0,0,0];
+    var delay=[0,0,0,0,0,0,0,0,0];
     var airports=['ORD','LAX','JFK', 'ATL','DFW','LAS','SFO','DEN','EWR' ];
     var i=0;
-    while(i<totals.len){
+    while(i<totals.length){
 	var j=0;
-	while(j<list[airports[i]].len){
-	    if(month==list[airports[i]][3]&&year==list[airports[i]][4]){
-		totals[i]+=list[airports[i]][1];
+	while(j<list[i][airports[i]].length){
+	    if(month==list[i][airports[i]][3]&&year==list[i][airports[i]][4]){
+		delay[i]+=list[airports[i]][1];
 	    };
+	    j+=1
 	};
+	i+=1
     };
-    return delays;
+    return delay;
 };
 
-loadDoc();
-console.log(totals[0]);
