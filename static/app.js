@@ -16,7 +16,7 @@ var totals=[];
 var delays=[];
 var totalscontainer = document.getElementById("totals");
 var delayscontainer = document.getElementById("delays");
-var reqId,tmonth,tyear,,dyear,dmonth,airport;
+var reqId,tmonth,tyear,dyear,dmonth,airport;
 var tyearslider = document.getElementById("tyear")
 var tmonthslider = document.getElementById("tmonth")
 //var dyearslider = document.getElementById("dyear")
@@ -25,11 +25,22 @@ var tmonthslider = document.getElementById("tmonth")
 //var tmonthinput = document.getElementById("tmonth");
 var tyearval = document.getElementById("tyearval");
 var tmonthval = document.getElementById("tmonthval");
-
+var coords ={
+	"ORD":[390,190],
+	"LAX":[100,300],
+	"ATL":[500,300],
+	"JFK":[600,180],
+	"DFW":[325,380],
+	"LAS":[150,270],
+	"SFO":[50,210],
+	"DEN":[200,270],
+	"EWR":[600,180]
+}
+list_of_airlines = ['American Airlines Inc.', 'Delta Air Lines Inc.', 'Southwest Airlines Co.', 'United Air Lines Inc.','Alaska Airlines Inc.', 'JetBlue Airways','Spirit Air Lines']
 
 var update = function(slideAmount){
-	tmonthval.innerHTML = tmonthslider.value;
-	tyearval.innerHTML = tyearslider.value;
+	tmonth = tmonthval.innerHTML = tmonthslider.value;
+	tyear = tyearval.innerHTML = tyearslider.value;
 }
 
 
@@ -65,7 +76,21 @@ var loadDoc = function() {
   xhttp.open("GET", "http://127.0.0.1:5000/list/", true);
   xhttp.send();
 };
-
+/*
+var getTotal = function(list, month, year, airport){
+    var i,j,k,total;
+	while(i<list.length){
+		if (airport in list[i]){
+				for data in list[j][airport]{
+					if (month==list[i][airport][3] && year==list[i][airport][4])
+						total=list[i][airports[i][airport][2];
+					}
+				}
+			}
+		}
+	return total;
+}
+*/
 var getTotal=function(list, month, year){
     var totals=[0,0,0,0,0,0,0,0,0];
     var airports=['ORD','LAX','JFK', 'ATL','DFW','LAS','SFO','DEN','EWR' ];
@@ -73,10 +98,9 @@ var getTotal=function(list, month, year){
     while(i<totals.len){
 	var j=0;
 	while(j<list[airports[i]].len){
-	    if(month==list[airports[i]][3]&&year=list[airports[i]][4]){
+	    if((month==list[airports[i]][3])&&(year=list[airports[i]][4])){
 		totals[i]+=list[airports[i]][2];
 	    };
-	};
     };
     return totals;
 };
@@ -89,24 +113,34 @@ var getDelays=function(list, month, year){
 	var j=0;
 	while(j<list[airports[i]].len){
 	    if(month==list[airports[i]][3]&&year==list[airports[i]][4]){
-		totals[i]+=list[airports[i]][1];
+		delays[i]+=list[airports[i]][1];
 	    };
-	};
     };
     return delays;
 };
 
-var createCircle = function (x,y,r) {
+var createCircle = function (x,y,r,airport) {
 	var c =	document.createElementNS("http://www.w3.org/2000/svg", "circle");
     c.setAttribute("fill", "blue");
     c.setAttribute("cx", x);
     c.setAttribute("cy", y);
-    c.setAttribute("r", r);    
+    c.setAttribute("r", r);
+    c.setAttribute("code",airport);
     //c.addEventListener("click", change);   //change to redirect to graphs
     return c;
 }
 
-d3.selectAll("circle").on("click", function(){ window.location.href="/totals/"}
+totalscontainer.appendChild(createCircle(600.180,30));
+d3.selectAll("circle").on("click", function(){ window.location.href="/totals/"});
+
+for(var code in coords){
+	var x = coords[code][0];
+	var y = coords[code][1];
+	var r = 15; //should be proportional to total flights
+	var airport = code;
+	newCirc = createCircle(x,y,r,airport);
+	totalscontainer.appendChild(newCirc);
+}
 
 /* 
 var clear = function() {
@@ -159,6 +193,9 @@ var dyn = d3.select("#delaysdynamic");
 			.text(function(d) { return d[1]})
 			.enter();
 			*/
+
+
+
 window.onload = function(){
 	update();
 }
