@@ -1,3 +1,4 @@
+
 function loadDoc() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -6,5 +7,9 @@ function loadDoc() {
     };
   };
   xhttp.open("GET", "http://127.0.0.1:5000/list/", true);
-  xhttp.send();
+  return xhttp.send();
 };
+
+
+var dataSet = loadDoc();
+console.log(dataSet)
