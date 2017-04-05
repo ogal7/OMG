@@ -16,7 +16,7 @@ var totals=[];
 var delays=[];
 var totalscontainer = document.getElementById("totals");
 var delayscontainer = document.getElementById("delays");
-var reqId,tmonth,tyear,dyear,dmonth,airport;
+var requestID,tmonth,tyear,dyear,dmonth,airport;
 var tyearslider = document.getElementById("tyear")
 var tmonthslider = document.getElementById("tmonth")
 //var dyearslider = document.getElementById("dyear")
@@ -26,7 +26,6 @@ var tmonthslider = document.getElementById("tmonth")
 var tyearval = document.getElementById("tyearval");
 var tmonthval = document.getElementById("tmonthval");
 var coords ={
-	"ORD":[390,190],
 	"LAX":[100,300],
 	"ATL":[500,300],
 	"JFK":[600,180],
@@ -38,13 +37,13 @@ var coords ={
 }
 list_of_airlines = ['American Airlines Inc.', 'Delta Air Lines Inc.', 'Southwest Airlines Co.', 'United Air Lines Inc.','Alaska Airlines Inc.', 'JetBlue Airways','Spirit Air Lines']
 
-var update = function(slideAmount){
+var update = function(){
 	tmonth = tmonthval.innerHTML = tmonthslider.value;
 	tyear = tyearval.innerHTML = tyearslider.value;
 }
 
-tyearval.addEventListener("onmousedown",update);
-tmonthval.addEventListener("onmousedown",update);
+tyearval.addEventListener("onmousedown",update());
+tmonthval.addEventListener("onmousedown",update());
 
 
 /*
@@ -87,11 +86,9 @@ var createCircle = function (x,y,r,airport) {
     //c.addEventListener("click", change);   //change to redirect to graphs
     return c;
 }
-//createCircle(500,180,30,"JFK");
 
-
-//totalscontainer.appendChild(createCircle(600.180,30));
-d3.selectAll("circle").on("click", function(){ window.location.href="/totals/"});
+var allCircs = d3.selectAll("circle");
+//d3.selectAll("circle").on("click", function(){ window.location.href="/totals/"});
 
 for(var code in coords){
 	var x = coords[code][0];
@@ -102,14 +99,13 @@ for(var code in coords){
 	totalscontainer.appendChild(newCirc);
 }
 
-/* 
+ 
 var clear = function() {
 	var list = document.getElementsByTagName("circle");
 	while (list.length != 0) {
-		container.removeChild(list[0]);
+		totalscontainer.removeChild(list[0]);
 	}
 }
-*/
 
 /*use ajax to get data from python
 
@@ -153,10 +149,8 @@ var dyn = d3.select("#delaysdynamic");
 			.text(function(d) { return d[1]})
 			.enter();
 			*/
-window.onload = function(){
-	update(0);
-}
 
+/*
 var anime = function() {
 	
     window.cancelAnimationFrame( requestID );
@@ -201,7 +195,7 @@ var anime = function() {
     };
     drawDot();
 };
-
+*/
 var getTotal = function(list, month, year){
     var total=[0,0,0,0,0,0,0,0,0];
     var airports=['ORD','LAX','ATL', 'JFK','DFW','LAS','SFO','DEN','EWR' ];
@@ -238,4 +232,6 @@ var getDelays=function(list, month, year){
     return delay;
 };
 
-anime();
+window.onload = function(){
+	update();
+}
