@@ -84,7 +84,8 @@ var createCircle = function (x,y,r,airport) {
     return c;
 }
 
-var allCircs = d3.selectAll("circle");
+var allCircs = d3.select("svg").selectAll("circle");
+allCircs.on("click",function(){ console.log("yes")});
 //d3.selectAll("circle").on("click", function(){ window.location.href="/totals/"});
 
 for(var code in coords){
