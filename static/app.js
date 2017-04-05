@@ -43,10 +43,8 @@ var update = function(slideAmount){
 	tyear = tyearval.innerHTML = tyearslider.value;
 }
 
-
-
-tyearinput.addEventListener("onmousedown",update);
-tmonthinput.addEventListener("onmousedown",update2);
+tyearval.addEventListener("onmousedown",update);
+tmonthval.addEventListener("onmousedown",update);
 
 
 /*
@@ -99,9 +97,10 @@ var getTotal=function(list, month, year){
 	var j=0;
 	while(j<list[airports[i]].len){
 	    if((month==list[airports[i]][3])&&(year=list[airports[i]][4])){
-		totals[i]+=list[airports[i]][2];
-	    };
-    };
+			totals[i]+=list[airports[i]][2];
+	    	};
+    	};
+	};
     return totals;
 };
 
@@ -113,9 +112,10 @@ var getDelays=function(list, month, year){
 	var j=0;
 	while(j<list[airports[i]].len){
 	    if(month==list[airports[i]][3]&&year==list[airports[i]][4]){
-		delays[i]+=list[airports[i]][1];
-	    };
-    };
+			delays[i]+=list[airports[i]][1];
+		    };
+	    }
+	};
     return delays;
 };
 
@@ -129,6 +129,8 @@ var createCircle = function (x,y,r,airport) {
     //c.addEventListener("click", change);   //change to redirect to graphs
     return c;
 }
+createCircle(500,180,30,"JFK");
+
 
 totalscontainer.appendChild(createCircle(600.180,30));
 d3.selectAll("circle").on("click", function(){ window.location.href="/totals/"});
@@ -193,9 +195,6 @@ var dyn = d3.select("#delaysdynamic");
 			.text(function(d) { return d[1]})
 			.enter();
 			*/
-
-
-
 window.onload = function(){
-	update();
+	update(0);
 }
