@@ -11,7 +11,6 @@ airList = []
 
 for entry in data:
 	airList.append(entry)
-	print entry
 
 app = Flask(__name__)
 
