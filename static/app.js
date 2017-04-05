@@ -21,8 +21,6 @@ var tyearslider = document.getElementById("tyear")
 var tmonthslider = document.getElementById("tmonth")
 //var dyearslider = document.getElementById("dyear")
 //var dmonthslider = document.getElementById("dmonth")
-//var tyearinput = document.getElementById("tyear");
-//var tmonthinput = document.getElementById("tmonth");
 var tyearval = document.getElementById("tyearval");
 var tmonthval = document.getElementById("tmonthval");
 var coords ={
@@ -38,13 +36,12 @@ var coords ={
 list_of_airlines = ['American Airlines Inc.', 'Delta Air Lines Inc.', 'Southwest Airlines Co.', 'United Air Lines Inc.','Alaska Airlines Inc.', 'JetBlue Airways','Spirit Air Lines']
 
 var update = function(){
-	tmonth = tmonthval.innerHTML = tmonthslider.value;
 	tyear = tyearval.innerHTML = tyearslider.value;
+	tmonth = tmonthval.innerHTML = tmonthslider.value;
 }
 
-tyearval.addEventListener("onmousedown",update());
-tmonthval.addEventListener("onmousedown",update());
-
+tyearslider.addEventListener("onmousedown",update);
+tmonthslider.addEventListener("onmousedown",update);
 
 /*
 var change = function(e) {
