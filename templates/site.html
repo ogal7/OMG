@@ -4,6 +4,8 @@
 <head>
 	<title>Airlines</title>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"> </script>
+    <link rel="stylesheet" href="../static/foundation_custom/css/foundation.css">
+    <link rel="stylesheet" href="../static/foundation_custom/css/app.css">
 	<!--<style>
 	div.flights{
 		text-align: center;
@@ -15,8 +17,60 @@
 		margin:4em;
 	}
 	</style> -->
+	<style>
+    .top-bar{
+        background-color:black;
+    }
+    .top-bar-left{
+        background-color:black;
+    }
+    .data-dropdown-menu{
+        background-color:black;
+    }
+    .menu-text{
+        background-color:black;
+        color:white;
+    }
+    @font-face {
+        font-family: myFirstFont;
+        src: url("/static/Amatic-Bold.ttf") format("truetype");
+    }
+    h1 {
+        font-family: myFirstFont;
+    }
+    h6 {
+    	font-size: 35px;
+    	font-family: myFirstFont;
+    	color:black;
+    }
+    body {  
+        background-image:url("/static/images.jpeg");
+        background-attachment: fixed;
+        background-position: center;
+        background-size: 100% 100%;
+        background-repeat: repeat;
+        font-family: myFirstFont;
+        font-size: 54px;
+        color:white;
+    }
+    button{
+        font-family: myFirstFont;
+        font-size: 40px;
+    }
+    </style>
+
 </head>
 <body>
+
+	<div class="top-bar">
+        <div class="top-bar-left">
+            <ul class="dropdown menu" data-dropdown-menu>
+                <li class="menu-text">OMG</li>
+            </ul>
+  </div>
+  <div class="top-bar-right">
+  </div>
+</div>
 	<center>
 		Total Flights<br>
 	<svg id="totals" height="420px" width="650" style="border:1px solid;" xmlns="http://www.w3.org/2000/svg">
@@ -25,12 +79,14 @@
 
 
 <br>
+<h6>
 <input type="range" id="tmonth" value="6" min="1" max="12" step="1" onchange="update()">Month<br>
 <p id="tmonthval"></p>
 
 <input type="range" id="tyear" value="2001" min="2000" max="2005" step="1" onchange="update()">Year<br>
 <p id="tyearval"></p>
-
+</h6>
+</div>
 <!--
 <p id="tyearval"></p>
 <br>
@@ -40,16 +96,20 @@
 <div>
   <input id="totalsbutton" type="range" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/>
 </div>
+
 -->
+
+<br>
 		<center>
 	Delays<br>
 	<svg id="delays" height="420px" width="650" style="border:1px solid;" xmlns="http://www.w3.org/2000/svg">
 	  <image href="/static/map.jpg" height="100%" width="100%"/>
 	</svg>
 	</center>
-
+<h6>
 	<input type="range" id="delaysmonth" value="1">Month<br>
 <input type="range" id="delaysyear" value="2000" min="2000" max="2005" step="1" type="int">Year<br>
+</h6>
 </body>
 
     <script src="/static/app.js"></script>
