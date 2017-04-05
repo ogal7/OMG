@@ -39,7 +39,7 @@ var coords ={
 	"EWR":[600,130]
 }
 list_of_airlines = ['American Airlines Inc.', 'Delta Air Lines Inc.', 'Southwest Airlines Co.', 'United Air Lines Inc.','Alaska Airlines Inc.', 'JetBlue Airways','Spirit Air Lines']
-
+var reqID=0;
 var update = function(){
 	tyear = tyearval.innerHTML = tyearslider.value;
 	tmonth = tmonthval.innerHTML = tmonthslider.value;
@@ -112,7 +112,7 @@ var createCircle = function (x,y,r,airport) {
 //var allCircs = d3.select("svg").selectAll("circle");
 //allCircs.on("click",function(){ console.log("yes")});
 //d3.selectAll("circle").on("click", function(){ window.location.href="/totals/"});
-
+/*
 for(var code in coords){
 	var x = coords[code][0];
 	var y = coords[code][1];
@@ -122,12 +122,12 @@ for(var code in coords){
 	totalscontainer.appendChild(newCirc);
 	delayscontainer.appendChild(newCirc);
 }
- 
-var clear = function() {
-	var list = document.getElementsByTagName("circle");
-	while (list.length != 0) {
-		totalscontainer.removeChild(list[0]);
-	}
+ */
+var clear = function(e) {
+    var list =totalscontainer.childNodes;
+    while (list.length != 0) {
+	totalscontainer.removeChild(list[0]);
+    }
 }
 
 /*use ajax to get data from python
@@ -172,16 +172,24 @@ var dyn = d3.select("#delaysdynamic");
 			.text(function(d) { return d[1]})
 			.enter();
 			*/
-
 /*
+var clear = function(e){
+    while(totalscontainer.lastChild){
+	totalscontainer.removeChild(totalscontainer.lastChild);
+    };
+    while(delayscontainer.lastChild){
+	delayscontainer.removeChild(delayscontainer.lastChild);
+    };
+};
+*/
 var anime = function() {
 	
-    window.cancelAnimationFrame( requestID );
+    window.cancelAnimationFrame( reqID );
 	
-    console.log(requestID);
+    console.log(reqID);
 
     var drawDot = function() {
-	console.log( requestID )
+	console.log( reqID )
 	
 	clear();
 	var c = document.createElementNS("http://www.w3.org/2000/svg","circle");
@@ -191,34 +199,36 @@ var anime = function() {
 		var list = JSON.parse(this.responseText);
 		totals=getTotal(list,tmonth,tyear);
 		delays=getDelays(list,tmonth,tyear);
+		console.log('hi');
 		console.log(totals[0]);
 		var i=0;
-		coords=[[390,190],[100,300],[500,300],[600,180],[325,380],[150,270],[50,210],[200,270],[600,180]]
+		var coordinates=[[390,190],[100,300],[500,300],[600,180],[325,380],[150,270],[50,210],[200,270],[600,180]];
 		while (i<9){
 		    var c = document.createElementNS("http://www.w3.org/2000/svg","circle");
-		    c.setAttribute("cx",coords[i][0]);
-		    c.setAttribute("cy",coords[i][i]);
-		    c.setAttribute("r",totals[i]/50);
+		    c.setAttribute("cx",''+coordinates[i][0]);
+		    c.setAttribute("cy",''+coordinates[i][1]);
+		    c.setAttribute("r",''+totals[i]);
 		    c.setAttribute("fill","yellow");
 		    totalscontainer.appendChild(c);
 
 		    var g = document.createElementNS("http://www.w3.org/2000/svg","circle");
-		    g.setAttribute("cx",coords[i][0]);
-		    g.setAttribute("cy",coords[i][i]);
+		    g.setAttribute("cx",coordinates[i][0]);
+		    g.setAttribute("cy",coordinates[i][1]);
 		    g.setAttribute("r",delays[i]/50);
 		    g.setAttribute("fill","yellow");
-		    delayscontainer.appendChild(c);
+		    delayscontainer.appendChild(g);
+		    i+=1;
 		};
 	    };
 	};
 	xhttp.open("GET", "http://127.0.0.1:5000/list/", true);
 	xhttp.send();
 	
-	requestID = window.requestAnimationFrame( drawDot );
+	reqID = window.requestAnimationFrame( drawDot );
     };
     drawDot();
 };
-*/
+/*
 var loadDoc = function() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -231,7 +241,7 @@ var loadDoc = function() {
   xhttp.send();
 };
 
-var getTotal = function(airport, month, year){
+var getTotal = function(list, month, year){
     var i=0;
     while(i<list.length){
 	    if(airport==list[i][0]&&month==list[i][4]&&year==list[i][5]){
@@ -243,7 +253,7 @@ var getTotal = function(airport, month, year){
     return total;
 };
 
-var getDelays = function(airport, month, year){
+var getDelays = function(list, month, year){
     var i=0;
     while(i<list.length){
 	    if(airport==list[i][0]&&month==list[i][4]&&year==list[i][5]){
@@ -254,8 +264,89 @@ var getDelays = function(airport, month, year){
     console.log(total[list[i][6]]);
     return total;
 };
-
+*/
 window.onload = function(){
 	update();
 	var svg = d3.select("svg");
 }
+
+
+var getTotal = function(list, month, year){
+    var total=[100,0,0,0,0,0,0,0,0];
+    var airports=['ORD','LAX','ATL', 'JFK','DFW','LAS','SFO','DEN','EWR' ];
+    var i=0;
+    while(i<list.length){
+	if(month==list[i][4]&&year==list[i][5]){
+	    console.log(list[i][0]);
+	if(list[i][0]=='ORD'){
+	    total[0]+=list[i][3];
+	};
+	if(list[i][0]=='LAX'){
+	    total[1]+=list[i][3];
+	};
+	if(list[i][0]=='ATL'){
+	    total[2]+=list[i][3];
+	};
+	if(list[i][0]=='JFK'){
+	    total[3]+=list[i][3];
+	};
+	if(list[i][0]=='DFW'){
+	    total[4]+=list[i][3];
+	};
+	if(list[i][0]=='LAS'){
+	    total[5]+=list[i][3];
+	};
+	if(list[i][0]=='SFO'){
+	    total[6]+=list[i][3];
+	};
+	if(list[i][0]=='DEN'){
+	    total[7]+=list[i][3];
+	};
+	if(list[i][0]=='OWR'){
+	    total[8]+=list[i][3];
+	};
+	};
+	i+=1;
+    };
+    console.log(total[0]);
+    return total;
+};
+
+var getDelays=function(list, month, year){
+    var delay=[0,0,0,0,0,0,0,0,0];
+    var airports=['ORD','LAX','JFK', 'ATL','DFW','LAS','SFO','DEN','EWR' ];
+    var i=0;
+    while(i<totals.length){
+	if(month==list[i][4]&&year==list[i][5]){
+	if(list[i][0]=='ORD'){
+	    total[0]+=list[i][3];
+	};
+	if(list[i][0]=='LAX'){
+	    total[1]+=list[i][3];
+	};
+	if(list[i][0]=='ATL'){
+	    total[2]+=list[i][3];
+	};
+	if(list[i][0]=='JFK'){
+	    total[3]+=list[i][3];
+	};
+	if(list[i][0]=='DFW'){
+	    total[4]+=list[i][3];
+	};
+	if(list[i][0]=='LAS'){
+	    total[5]+=list[i][3];
+	};
+	if(list[i][0]=='SFO'){
+	    total[6]+=list[i][3];
+	};
+	if(list[i][0]=='DEN'){
+	    total[7]+=list[i][3];
+	};
+	if(list[i][0]=='OWR'){
+	    total[8]+=list[i][3];
+	};
+	};
+	i+=1;	
+    };
+    return delay;
+};
