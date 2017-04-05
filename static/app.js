@@ -55,7 +55,7 @@ dmonthslider.addEventListener("onmousedown",update);
 function passData(input){
         var jqXHR = $.ajax({
             type: "POST",
-            url: "/totals",
+            url: "/totals/",
             async: false,
             data: { mydata: input }
         });
@@ -350,3 +350,6 @@ var getDelays=function(list, month, year){
     };
     return delay;
 };
+
+
+

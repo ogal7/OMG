@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../static/foundation_custom/css/foundation.css">
     <link rel="stylesheet" href="../static/foundation_custom/css/app.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    
 	<!--<style>
 	div.flights{
 		text-align: center;
@@ -69,10 +70,9 @@
             <ul class="dropdown menu" data-dropdown-menu>
                 <li class="menu-text">OMG</li>
             </ul>
-  </div>
-  <div class="top-bar-right">
-  </div>
-</div>
+        </div>
+        <div class="top-bar-right"></div>
+    </div>
 	<center>
 		Total Flights<br>
 	<svg id="totals" height="420px" width="650" style="border:1px solid;" xmlns="http://www.w3.org/2000/svg">
@@ -80,15 +80,14 @@
 	</svg>
 
 
-<br>
-<h6>
-<input type="range" id="tmonth" value="6" min="1" max="12" step="1" onchange="update()">Month<br>
-<p id="tmonthval"></p>
+    <br>
+    <h6>    
+    <input type="range" id="tmonth" value="6" min="1" max="12" step="1" onchange="update()">Month<br>
+    <p id="tmonthval"></p>
 
-<input type="range" id="tyear" value="2001" min="2000" max="2005" step="1" onchange="update()">Year<br>
-<p id="tyearval"></p>
-</h6>
-</div>
+    <input type="range" id="tyear" value="2001" min="2000" max="2005" step="1" onchange="update()">Year<br>
+    <p id="tyearval"></p>
+    </h6>
 <!--
 <p id="tyearval"></p>
 <br>
@@ -101,25 +100,26 @@
 
 -->
 
-<br>
-		<center>
+    <br>
+	<center>
 	Delays<br>
 	<svg id="delays" height="420px" width="650" style="border:1px solid;" xmlns="http://www.w3.org/2000/svg">
 	  <image href="/static/map.jpg" height="100%" width="100%"/>
 	</svg>
 	</center>
 
-<br>
-<h6>
-<input type="range" id="dmonth" value="6" min="1" max="12" step="1" onchange="update()">Month<br>
-<p id="dmonthval"></p>
+    <br>
+    <h6>
+    <input type="range" id="dmonth" value="6" min="1" max="12" step="1" onchange="update()">Month<br>
+    <p id="dmonthval"></p>
 
-<input type="range" id="dyear" value="2001" min="2000" max="2005" step="1" onchange="update()">Year<br>
-<p id="dyearval"></p>
-</h6>
+    <input type="range" id="dyear" value="2001" min="2000" max="2005" step="1" onchange="update()">Year<br>
+    <p id="dyearval"></p>
+    </h6>
 
-</div>
-</body>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="/static/app.js"></script>
-</html>
+
+    </body>
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script src="/static/app.js"></script>
+    
+    </html>
