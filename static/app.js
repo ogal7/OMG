@@ -73,6 +73,7 @@ var getTotal = function(list, month, year, airport){
 }
 */
 
+
 var createCircle = function (x,y,r,airport) {
 	var c =	document.createElementNS("http://www.w3.org/2000/svg", "circle");
     c.setAttribute("fill", "blue");
@@ -80,12 +81,41 @@ var createCircle = function (x,y,r,airport) {
     c.setAttribute("cy", y);
     c.setAttribute("r", r);
     c.setAttribute("code",airport);
-    //c.addEventListener("click", change);   //change to redirect to graphs
+    c.addEventListener("click", function(){
+    	window.location.href="/totals/"
+    	/*
+    	console.log("yes"); 
+	    stage.toDataURL({
+	                    callback: function (dataUrl) {
+
+	                        //window.open(dataUrl);
+	                        // Send the screenshot to PHP to save it on the server
+	                        var url = 'export.php';
+	                        //alert(url);
+	                        $.ajax({
+						    type: "POST",
+						    url: url,
+						    dataType: 'text',
+						    data: {
+						        base64data: dataUrl,
+						        yname: thename,
+						        yemail: theemail,
+						        company: thecomp,
+						        twitter: thetwitter
+						    },
+						    success: function() {
+						        location.href = '/totals/';
+						    }
+						});
+
+	                    }
+	                });*/
+	                });   //change to redirect to graphs
     return c;
 }
 
-var allCircs = d3.select("svg").selectAll("circle");
-allCircs.on("click",function(){ console.log("yes")});
+//var allCircs = d3.select("svg").selectAll("circle");
+//allCircs.on("click",function(){ console.log("yes")});
 //d3.selectAll("circle").on("click", function(){ window.location.href="/totals/"});
 
 for(var code in coords){
@@ -232,4 +262,6 @@ var getDelays=function(list, month, year){
 
 window.onload = function(){
 	update();
+	var svg = d3.select("svg");
+
 }

@@ -4,18 +4,27 @@
 <head>
 	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 </head>
-<h1>Total Flights for {{airport}}<h2>
+<h1>Total Flights<h2>
 <body>
 	<!--BAR graph with horizontal bars, each showing a total # of flights for each airline at that airport, with dynamic data that changes as you drag the bar -->
 		<br>
 		<br>
 		<!--<h1>{{head}}</h1>-->
 	<div class="chart" id="dynamic">
-			<div id="cancelled"> </div>
-			<div id="on time"> </div>
-			<div id="delayed"> </div>
-			<div id="diverted"> </div>
 		</div>
+	
 </body>
+
+<script>
+d3.select("body").selectAll("div")
+    .data(dataset)
+    .enter()
+    .append("div")
+    .attr("class", "bar")
+    .style("height", function(d) {
+        var barHeight = d * 5;
+        return barHeight + "px";
+    });
+</script>
 
 </html>	

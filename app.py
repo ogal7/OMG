@@ -18,7 +18,7 @@ app = Flask(__name__)
 def main():
     return render_template('site.html')
 
-@app.route("/totals/", methods=["POST"])
+@app.route("/totals/", methods=["GET","POST"])
 def totals():
 	return render_template('totals.html')
 
