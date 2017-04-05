@@ -87,10 +87,10 @@ var createCircle = function (x,y,r,airport) {
     //c.addEventListener("click", change);   //change to redirect to graphs
     return c;
 }
-createCircle(500,180,30,"JFK");
+//createCircle(500,180,30,"JFK");
 
 
-totalscontainer.appendChild(createCircle(600.180,30));
+//totalscontainer.appendChild(createCircle(600.180,30));
 d3.selectAll("circle").on("click", function(){ window.location.href="/totals/"});
 
 for(var code in coords){
@@ -181,14 +181,14 @@ var anime = function() {
 		    var c = document.createElementNS("http://www.w3.org/2000/svg","circle");
 		    c.setAttribute("cx",coords[i][0]);
 		    c.setAttribute("cy",coords[i][i]);
-		    c.setAttribute("r",totals[i]);
+		    c.setAttribute("r",totals[i]/50);
 		    c.setAttribute("fill","yellow");
 		    totalscontainer.appendChild(c);
 
 		    var g = document.createElementNS("http://www.w3.org/2000/svg","circle");
 		    g.setAttribute("cx",coords[i][0]);
 		    g.setAttribute("cy",coords[i][i]);
-		    g.setAttribute("r",delays[i]);
+		    g.setAttribute("r",delays[i]/50);
 		    g.setAttribute("fill","yellow");
 		    delayscontainer.appendChild(c);
 		};
