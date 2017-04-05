@@ -44,22 +44,12 @@ var dyn = d3.select("#dynamic")
     .data(info)
     //.attr("class", "bar")
     .text(function(d) {return d[0]})
-    .style("width",function(d){ return d[1]*10 +"px"})
+    .style("width",function(d){ return d[1]*80 +"px"})
     //.style("height", function(d) {
     //    var barHeight = d[1] * 5;
     //    return barHeight + "px";
     //}
     .enter();
-/*
-var dyn = d3.select("#totalsdynamic");
-			
-			dyn.selectAll("div")
-			.data(info)
-			.style("width", function(d) { return parseInt(d[1]) *80 + "px"})
-			.text(function(d) { return d[0]})
-			.enter();
-			*/
-
 
 
 var loadDoc = function() {
@@ -67,13 +57,9 @@ var loadDoc = function() {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
 	list = JSON.parse(this.responseText);
-	console.log(list[0]);
-	//totals=getTotal(list,'11','2012');
-//	delays=getDelays(list,'11','2005');
-	//console.log(totals[0]);
-    };
+	console.log(list[0]);    };
   };
-  xhttp.open("GET", "http://127.0.0.1:5000/list/", true);
+  xhttp.open("GET", "http://127.0.0.1:5000/list/", false);
   xhttp.send();
 };
 

@@ -7,38 +7,83 @@
     <link rel="stylesheet" href="../static/foundation_custom/css/app.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <style>
-			.chart div {
-				font:10px sans-serif;
-				background-color:pink;
-				text-align:right;
-				padding:3px;
-				margin:1px;
-				color:white;
+    .top-bar{
+        background-color:black;
+    }
+    .top-bar-left{
+        background-color:black;
+    }
+    .data-dropdown-menu{
+        background-color:black;
+    }
+    .menu-text{
+        background-color:black;
+        color:white;
+    }
+    @font-face {
+        font-family: myFirstFont;
+        src: url("/static/Amatic-Bold.ttf") format("truetype");
+    }
+    h1 {
+    	text-align: center;
+        font-family: myFirstFont;
+    }
+    h6 {
+    	text-align: center;
+    	font-size: 35px;
+    	font-family: myFirstFont;
+    	color:black;
+    }
+    body {
+    	text-align: center;  
+        background-image:url("/static/images.jpeg");
+        background-attachment: fixed;
+        background-position: center;
+        background-size: 100% 100%;
+        background-repeat: repeat;
+        font-family: myFirstFont;
+        font-size: 54px;
+        color:white;
+    }
+    button{
+        font-family: myFirstFont;
+        font-size: 40px;
+    }
+	.chart div {
+			font:10px sans-serif;
+			background-color:pink;
+			text-align:right;
+			padding:5px;
+			margin:3px;
+			color:black;
+			font-weight:bold;
+			font-size:small;
 			}
 		</style>
 </head>
-<h1>Total Flights<h2>
+
 <body>
-	<!--BAR graph with horizontal bars, each showing a total # of flights for each airline at that airport, with dynamic data that changes as you drag the bar -->
+	<div>
+	<h1>Total Flights<h1></div>
+
 	<div class="chart" id="dynamic">
-		<div>'American Airlines Inc.'</div>
-		<div>'Delta Air Lines Inc.'</div>
-		<div>'Southwest Airlines Co.'</div>
-		<div>'United Air Lines Inc.'</div>
-		<div>'Alaska Airlines Inc.'</div>
-		<div>'JetBlue Airways'</div>
-		<div>'Spirit Air Lines'</div>
+		<div>American Airlines Inc.</div>
+		<div>Delta Air Lines Inc.</div>
+		<div>Southwest Airlines Co.</div>
+		<div>United Air Lines Inc.</div>
+		<div>Alaska Airlines Inc.</div>
+		<div>JetBlue Airways</div>
+		<div>Spirit Air Lines</div>
 		</div>
-		<br>
-		<br>
-		<input type="range" id="tmonth" value="6" min="1" max="12" step="1" onchange="update()">Month<br>
+
+<div><h6>
+
+<input type="range" id="tmonth" value="6" min="1" max="12" step="1" onchange="update()">Month<br>
 <p id="tmonthval"></p>
 
 <input type="range" id="tyear" value="2001" min="2000" max="2005" step="1" onchange="update()">Year<br>
 <p id="tyearval"></p>
-		<!--<h1>{{head}}</h1>-->
-	<div class="chart" id="dynamic">
-		</div>
+</center></h6></div>
 	
 </body>
 <script src="/static/totals.js"></script>

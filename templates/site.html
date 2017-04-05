@@ -53,6 +53,7 @@
         font-family: myFirstFont;
         font-size: 54px;
         color:white;
+        margin-bottom:80px;
     }
     button{
         font-family: myFirstFont;
@@ -107,10 +108,17 @@
 	  <image href="/static/map.jpg" height="100%" width="100%"/>
 	</svg>
 	</center>
+
+<br>
 <h6>
-	<input type="range" id="delaysmonth" value="1">Month<br>
-<input type="range" id="delaysyear" value="2000" min="2000" max="2005" step="1" type="int">Year<br>
+<input type="range" id="dmonth" value="6" min="1" max="12" step="1" onchange="update()">Month<br>
+<p id="dmonthval"></p>
+
+<input type="range" id="dyear" value="2001" min="2000" max="2005" step="1" onchange="update()">Year<br>
+<p id="dyearval"></p>
 </h6>
+
+</div>
 </body>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="/static/app.js"></script>

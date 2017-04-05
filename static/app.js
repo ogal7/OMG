@@ -1,17 +1,3 @@
-
-
-//* use slider to update month and year variables
-
-// fx(airport, year) get total flights
-// fx(airport, year) get delays
-// fx(airport, year) get flights info return ["cancelled","on time", total, delayed diverted]
-// fx(airport, year) get delays info
-  //return [late aircraft, weather, security, national aviation system
-
-//d3 stuff dynamic
-//link circles with their airport data
-//create bar graph with d3
-
 var totals={
 	'American Airlines Inc.':0, 
 	'Delta Air Lines Inc.':0, 
@@ -21,67 +7,52 @@ var totals={
 	'JetBlue Airways':0,
 	'Spirit Air Lines':0
 };
-var delays=[];
+var delays={
+	'American Airlines Inc.':0, 
+	'Delta Air Lines Inc.':0, 
+	'Southwest Airlines Co.':0, 
+	'United Air Lines Inc.':0,
+	'Alaska Airlines Inc.':0, 
+	'JetBlue Airways':0,
+	'Spirit Air Lines':0
+};
 var list;
+var requestID,tmonth,tyear,dyear,dmonth,airport;
 var totalscontainer = document.getElementById("totals");
 var delayscontainer = document.getElementById("delays");
-var requestID,tmonth,tyear,dyear,dmonth,airport;
 var tyearslider = document.getElementById("tyear")
 var tmonthslider = document.getElementById("tmonth")
-//var dyearslider = document.getElementById("dyear")
-//var dmonthslider = document.getElementById("dmonth")
+var dyearslider = document.getElementById("dyear")
+var dmonthslider = document.getElementById("dmonth")
 var tyearval = document.getElementById("tyearval");
 var tmonthval = document.getElementById("tmonthval");
+var dyearval = document.getElementById("tyearval");
+var dmonthval = document.getElementById("tmonthval");
 var coords ={
-	"LAX":[100,300],
-	"ATL":[500,300],
-	"JFK":[600,180],
-	"DFW":[325,380],
-	"LAS":[150,270],
-	"SFO":[50,210],
-	"DEN":[200,270],
-	"EWR":[600,180]
+	"LAX":[100,250],
+	"ATL":[490,250],
+	"JFK":[600,130],
+	"DFW":[325,330],
+	"LAS":[150,220],
+	"SFO":[50,160],
+	"DEN":[200,220],
+	"EWR":[600,130]
 }
 list_of_airlines = ['American Airlines Inc.', 'Delta Air Lines Inc.', 'Southwest Airlines Co.', 'United Air Lines Inc.','Alaska Airlines Inc.', 'JetBlue Airways','Spirit Air Lines']
 
 var update = function(){
 	tyear = tyearval.innerHTML = tyearslider.value;
 	tmonth = tmonthval.innerHTML = tmonthslider.value;
+	dyear = dyearval.innerHTML = dyearslider.value;
+	dmonth = dmonthval.innerHTML = dmonthslider.value;
 }
 
 tyearslider.addEventListener("onmousedown",update);
 tmonthslider.addEventListener("onmousedown",update);
+dyearslider.addEventListener("onmousedown",update);
+dmonthslider.addEventListener("onmousedown",update);
 
-/*
-var change = function(e) {
-	if (this.getAttribute("fill") == "pink") {
-		container.removeChild(this);
-		var c = createCircle(Math.random()*500,Math.random()*500);	
-		container.appendChild(c);
-		e.stopPropagation();
-	}
-	else {
-		this.setAttribute("fill", "pink");
-		e.stopPropagation();
-	}	
-}
-*/
-/*
-var getTotal = function(list, month, year, airport){
-    var i,j,k,total;
-	while(i<list.length){
-		if (airport in list[i]){
-				for data in list[j][airport]{
-					if (month==list[i][airport][3] && year==list[i][airport][4])
-						total=list[i][airports[i][airport][2];
-					}
-				}
-			}
-		}
-	return total;
-}
-*/
- function passData(input){
+function passData(input){
         var jqXHR = $.ajax({
             type: "POST",
             url: "/totals",
@@ -134,7 +105,7 @@ var createCircle = function (x,y,r,airport) {
 
 	                    }
 	                });*/
-	                });   //change to redirect to graphs
+	                });
     return c;
 }
 
@@ -149,8 +120,8 @@ for(var code in coords){
 	var airport = code;
 	newCirc = createCircle(x,y,r,airport);
 	totalscontainer.appendChild(newCirc);
+	delayscontainer.appendChild(newCirc);
 }
-
  
 var clear = function() {
 	var list = document.getElementsByTagName("circle");
@@ -254,9 +225,6 @@ var loadDoc = function() {
     if (this.readyState == 4 && this.status == 200) {
 	list = JSON.parse(this.responseText);
 	console.log(list[0]);
-	//totals=getTotal(list,'11','2012');
-//	delays=getDelays(list,'11','2005');
-	//console.log(totals[0]);
     };
   };
   xhttp.open("GET", "http://127.0.0.1:5000/list/", true);
@@ -275,8 +243,19 @@ var getTotal = function(airport, month, year){
     return total;
 };
 
+var getDelays = function(airport, month, year){
+    var i=0;
+    while(i<list.length){
+	    if(airport==list[i][0]&&month==list[i][4]&&year==list[i][5]){
+		delay[list[i][6]]=list[i][2];
+		};
+		i+=1;
+    };
+    console.log(total[list[i][6]]);
+    return total;
+};
+
 window.onload = function(){
 	update();
 	var svg = d3.select("svg");
-
 }

@@ -15,7 +15,26 @@ var loadDoc = function() {
   xhttp.open("GET", "http://127.0.0.1:5000/list/", true);
   xhttp.send();
 };
-
+/*
+var getTotal = function(list, month, year){
+    var total=[0,0,0,0,0,0,0,0,0];
+    var airports=['ORD','LAX','ATL', 'JFK','DFW','LAS','SFO','DEN','EWR' ];
+    var i=0;
+    while(i<list.length){
+	var j=0;
+	while(j<list[i][airports[i]].length){
+	    console.log(list[i][airports[i]][j]);
+	    if(month==list[i][airports[i]][j][3]&&year==list[i][airports[i]][j][4]){
+		total[i]+=list[i][airports[i]][j][2];
+	    };
+	    j+=1
+	};
+	i+=1;
+    };
+    console.log(total[0]);
+    return total;
+};
+*/
 var getTotal = function(list, month, year){
     var total=[0,0,0,0,0,0,0,0,0];
     var airports=['ORD','LAX','ATL', 'JFK','DFW','LAS','SFO','DEN','EWR' ];

@@ -1,0 +1,50 @@
+--Devlog--
+Gio --2017-03-27
+Olivia -- 2017-03-27
+Michael -- 2017-03-27
+
+Olivia -- 2017-03-27
+-design doc
+
+Gio --2017-03-27
+-readme
+
+Olivia -- 2017-03-31
+-init files
+
+Michael -- 2017-04-03
+-maps
+-work on js
+
+Gio --2017-04-03
+-html files
+
+Olivia -- 2017-04-04
+-app.py
+-parse data
+
+Gio --2017-04-04
+-test files
+-worked on sending the data
+
+Michael -- 2017-04-04
+-sliders
+-fix maps
+
+Gio --2017-04-05
+-funcs to parse data to get info
+-draw circles on map
+
+Olivia -- 2017-04-05
+-create db with parsed data
+-styling
+
+Michael -- 2017-04-05
+-fixed slider
+-create circles that redirect
+-graphs
+-html
+
+
+
+
