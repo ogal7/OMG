@@ -12,8 +12,17 @@
 //link circles with their airport data
 //create bar graph with d3
 
-var totals=[];
+var totals={
+	'American Airlines Inc.':0, 
+	'Delta Air Lines Inc.':0, 
+	'Southwest Airlines Co.':0, 
+	'United Air Lines Inc.':0,
+	'Alaska Airlines Inc.':0, 
+	'JetBlue Airways':0,
+	'Spirit Air Lines':0
+};
 var delays=[];
+var list;
 var totalscontainer = document.getElementById("totals");
 var delayscontainer = document.getElementById("delays");
 var requestID,tmonth,tyear,dyear,dmonth,airport;
@@ -239,40 +248,31 @@ var anime = function() {
     drawDot();
 };
 */
-var getTotal = function(list, month, year){
-    var total=[0,0,0,0,0,0,0,0,0];
-    var airports=['ORD','LAX','ATL', 'JFK','DFW','LAS','SFO','DEN','EWR' ];
-    var i=0;
-    while(i<list.length){
-	var j=0;
-	while(j<list[i][airports[i]].length){
-	    console.log(list[i][airports[i]][j]);
-	    if(month==list[i][airports[i]][j][3]&&year==list[i][airports[i]][j][4]){
-		total[i]+=list[i][airports[i]][j][2];
-	    };
-	    j+=1
-	};
-	i+=1;
+var loadDoc = function() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+	list = JSON.parse(this.responseText);
+	console.log(list[0]);
+	//totals=getTotal(list,'11','2012');
+//	delays=getDelays(list,'11','2005');
+	//console.log(totals[0]);
     };
-    console.log(total[0]);
-    return total;
+  };
+  xhttp.open("GET", "http://127.0.0.1:5000/list/", true);
+  xhttp.send();
 };
 
-var getDelays=function(list, month, year){
-    var delay=[0,0,0,0,0,0,0,0,0];
-    var airports=['ORD','LAX','JFK', 'ATL','DFW','LAS','SFO','DEN','EWR' ];
+var getTotal = function(airport, month, year){
     var i=0;
-    while(i<totals.length){
-	var j=0;
-	while(j<list[i][airports[i]].length){
-	    if(month==list[i][airports[i]][j][3]&&year==list[i][airports[i]][j][4]){
-		delay[i]+=list[airports[i]][j][1];
-	    };
-	    j+=1
-	};
-	i+=1
+    while(i<list.length){
+	    if(airport==list[i][0]&&month==list[i][4]&&year==list[i][5]){
+		total[list[i][6]]=list[i][3];
+		};
+		i+=1;
     };
-    return delay;
+    console.log(total[list[i][6]]);
+    return total;
 };
 
 window.onload = function(){

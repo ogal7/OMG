@@ -3,6 +3,9 @@
 
 <head>
 	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../static/foundation_custom/css/foundation.css">
+    <link rel="stylesheet" href="../static/foundation_custom/css/app.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 </head>
 <h1>Total Flights<h2>
 <body>
@@ -19,17 +22,5 @@
 		</div>
 	
 </body>
-
-<script>
-d3.select("body").selectAll("div")
-    .data(dataset)
-    .enter()
-    .append("div")
-    .attr("class", "bar")
-    .style("height", function(d) {
-        var barHeight = d * 5;
-        return barHeight + "px";
-    });
-</script>
-
+<script src="/static/totals.js"></script>
 </html>	

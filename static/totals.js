@@ -1,6 +1,15 @@
-var totals=[];
-var delays=[];
-var dataset;
+var totals={
+	'American Airlines Inc.':0, 
+	'Delta Air Lines Inc.':0, 
+	'Southwest Airlines Co.':0, 
+	'United Air Lines Inc.':0,
+	'Alaska Airlines Inc.':0, 
+	'JetBlue Airways':0,
+	'Spirit Air Lines':0
+};
+var list,tyear,tmonth;
+//var dataset = {{data|tojson|safe}};
+//console.log(dataset);
 var requestID,tmonth,tyear,airport;
 var tyearslider = document.getElementById("tyear")
 var tmonthslider = document.getElementById("tmonth")
@@ -11,66 +20,69 @@ list_of_airlines = ['American Airlines Inc.', 'Delta Air Lines Inc.', 'Southwest
 var update = function(){
 	tyear = tyearval.innerHTML = tyearslider.value;
 	tmonth = tmonthval.innerHTML = tmonthslider.value;
+	getTotal(airport,tmonth,tyear)
 }
 
 tyearslider.addEventListener("onmousedown",update);
 tmonthslider.addEventListener("onmousedown",update);
 
+
+d3.select("body").selectAll("div")
+	var info = [             
+			    [ 'American Airlines Inc.', totals['American Airlines Inc.']]//[airline,totals]
+			    ['Delta Air Lines Inc.', totals['Delta Air Lines Inc.']]
+			    ['Southwest Airlines Co.',totals['Southwest Airlines Co.']]
+			    ['United Air Lines Inc.', totals['United Air Lines Inc.']]
+			    ['Alaska Airlines Inc.', totals['Alaska Airlines Inc.']]
+			    ['JetBlue Airways', totals['JetBlue Airways']]
+			    ['Spirit Air Lines', totals['Spirit Air Lines']]
+			]
+    .data(info)
+    .enter()
+    .append("div")
+    .attr("class", "bar")
+    .text(function(d){return d[0]})
+    .style("height", function(d) {
+        var barHeight = d * 5;
+        return barHeight + "px";
+    });
 /*
 var dyn = d3.select("#totalsdynamic");
-			var info = [             
-			    [ 'American Airlines Inc.', getTotals(airline,month,year)]//[airline,totals]
-			    ['Delta Air Lines Inc.', getTotals(airline,month,year)]
-			    ['Southwest Airlines Co.', getTotals(airline,month,year)]
-			    ['United Air Lines Inc.', getTotals(airline,month,year)]
-			    ['Alaska Airlines Inc.', getTotals(airline,month,year)] 
-			    ['JetBlue Airways', getTotals(airline,month,year)]
-			    ['Spirit Air Lines', getTotals(airline,month,year)]
-			]
+			
 			dyn.selectAll("div")
 			.data(info)
 			.style("width", function(d) { return parseInt(d[1]) *80 + "px"})
 			.text(function(d) { return d[0]})
 			.enter();
 			*/
-var getTotal = function(list, month, year){
-    var total=[0,0,0,0,0,0,0,0,0];
-    var airports=['ORD','LAX','ATL', 'JFK','DFW','LAS','SFO','DEN','EWR' ];
+var loadDoc = function() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+	list = JSON.parse(this.responseText);
+	console.log(list[0]);
+	//totals=getTotal(list,'11','2012');
+//	delays=getDelays(list,'11','2005');
+	//console.log(totals[0]);
+    };
+  };
+  xhttp.open("GET", "http://127.0.0.1:5000/list/", true);
+  xhttp.send();
+};
+
+var getTotal = function(airport, month, year){
     var i=0;
     while(i<list.length){
-	var j=0;
-	while(j<list[i][airports[i]].length){
-	    console.log(list[i][airports[i]][j]);
-	    if(month==list[i][airports[i]][j][3]&&year==list[i][airports[i]][j][4]){
-		total[i]+=list[i][airports[i]][j][2];
-	    };
-	    j+=1
-	};
-	i+=1;
+	    if(airport==list[i][0]&&month==list[i][4]&&year==list[i][5]){
+		total[list[i][6]]=list[i][3];
+		};
+		i+=1;
     };
-    console.log(total[0]);
+    console.log(total[list[i][6]]);
     return total;
 };
 
-var getDelays=function(list, month, year){
-    var delay=[0,0,0,0,0,0,0,0,0];
-    var airports=['ORD','LAX','JFK', 'ATL','DFW','LAS','SFO','DEN','EWR' ];
-    var i=0;
-    while(i<totals.length){
-	var j=0;
-	while(j<list[i][airports[i]].length){
-	    if(month==list[i][airports[i]][j][3]&&year==list[i][airports[i]][j][4]){
-		delay[i]+=list[airports[i]][j][1];
-	    };
-	    j+=1
-	};
-	i+=1
-    };
-    return delay;
-};
 
 window.onload = function(){
 	update();
-	var svg = d3.select("svg");
-
 }

@@ -31,7 +31,7 @@ def test():
         return render_template('test.html')
 
 #ajax route
-@app.route("/list/", methods=["GET"])
+@app.route("/list/", methods=["GET","POST"])
 def list():
     return json.dumps(airList)
 
