@@ -11,6 +11,9 @@ var list,tyear,tmonth;
 //var dataset = {{data|tojson|safe}};
 //console.log(dataset);
 var requestID,tmonth,tyear,airport;
+airport="LAX"
+tmonth=1
+tyear=2011
 var tyearslider = document.getElementById("tyear")
 var tmonthslider = document.getElementById("tmonth")
 var tyearval = document.getElementById("tyearval");
@@ -27,7 +30,7 @@ tyearslider.addEventListener("onmousedown",update);
 tmonthslider.addEventListener("onmousedown",update);
 
 
-d3.select("body").selectAll("div")
+var dyn = d3.select("#dynamic")
 	var info = [             
 			    [ 'American Airlines Inc.', totals['American Airlines Inc.']]//[airline,totals]
 			    ['Delta Air Lines Inc.', totals['Delta Air Lines Inc.']]
@@ -37,15 +40,16 @@ d3.select("body").selectAll("div")
 			    ['JetBlue Airways', totals['JetBlue Airways']]
 			    ['Spirit Air Lines', totals['Spirit Air Lines']]
 			]
+	dyn.selectAll("div")
     .data(info)
-    .enter()
-    .append("div")
-    .attr("class", "bar")
-    .text(function(d){return d[0]})
-    .style("height", function(d) {
-        var barHeight = d * 5;
-        return barHeight + "px";
-    });
+    //.attr("class", "bar")
+    .text(function(d) {return d[0]})
+    .style("width",function(d){ return d[1]*10 +"px"})
+    //.style("height", function(d) {
+    //    var barHeight = d[1] * 5;
+    //    return barHeight + "px";
+    //}
+    .enter();
 /*
 var dyn = d3.select("#totalsdynamic");
 			
@@ -55,6 +59,9 @@ var dyn = d3.select("#totalsdynamic");
 			.text(function(d) { return d[0]})
 			.enter();
 			*/
+
+
+
 var loadDoc = function() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -85,4 +92,5 @@ var getTotal = function(airport, month, year){
 
 window.onload = function(){
 	update();
+	loadDoc();
 }

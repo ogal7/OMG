@@ -6,10 +6,29 @@
     <link rel="stylesheet" href="../static/foundation_custom/css/foundation.css">
     <link rel="stylesheet" href="../static/foundation_custom/css/app.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <style>
+			.chart div {
+				font:10px sans-serif;
+				background-color:pink;
+				text-align:right;
+				padding:3px;
+				margin:1px;
+				color:white;
+			}
+		</style>
 </head>
 <h1>Total Flights<h2>
 <body>
 	<!--BAR graph with horizontal bars, each showing a total # of flights for each airline at that airport, with dynamic data that changes as you drag the bar -->
+	<div class="chart" id="dynamic">
+		<div>'American Airlines Inc.'</div>
+		<div>'Delta Air Lines Inc.'</div>
+		<div>'Southwest Airlines Co.'</div>
+		<div>'United Air Lines Inc.'</div>
+		<div>'Alaska Airlines Inc.'</div>
+		<div>'JetBlue Airways'</div>
+		<div>'Spirit Air Lines'</div>
+		</div>
 		<br>
 		<br>
 		<input type="range" id="tmonth" value="6" min="1" max="12" step="1" onchange="update()">Month<br>
