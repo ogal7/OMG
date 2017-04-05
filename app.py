@@ -20,7 +20,7 @@ def main():
 
 @app.route("/totals/", methods=["GET","POST"])
 def totals():
-	return render_template('totals.html')
+	return render_template('totals.html', data = input)
 
 @app.route("/delays/", methods=["POST"])
 def delays():

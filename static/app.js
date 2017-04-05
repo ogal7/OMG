@@ -72,7 +72,22 @@ var getTotal = function(list, month, year, airport){
 	return total;
 }
 */
+ function passData(input){
+        var jqXHR = $.ajax({
+            type: "POST",
+            url: "/totals",
+            async: false,
+            data: { mydata: input }
+        });
 
+        return jqXHR.responseText;
+    }
+
+    $('#circle').click(function(){
+        datatosend = [tmonth,tyear,airport];
+        result = passData(datatosend);
+        console.log('Got back ' + result);
+    });
 
 var createCircle = function (x,y,r,airport) {
 	var c =	document.createElementNS("http://www.w3.org/2000/svg", "circle");
