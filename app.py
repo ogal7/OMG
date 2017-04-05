@@ -34,7 +34,7 @@ def test():
 #ajax route
 @app.route("/list/", methods=["GET"])
 def list():
-        return json.dumps(finalList)
+    return json.dumps(airList)
 
 if(__name__ == "__main__"):
     app.debug = True
