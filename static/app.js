@@ -38,6 +38,7 @@ var update = function(){
 	tmonth = tmonthval.innerHTML = tmonthslider.value;
 	dyear = dyearval.innerHTML = dyearslider.value;
 	dmonth = dmonthval.innerHTML = dmonthslider.value;
+	clear();
 	initCircles();
 }
 
@@ -46,11 +47,18 @@ tmonthslider.addEventListener("change",update);
 dyearslider.addEventListener("change",update);
 dmonthslider.addEventListener("change",update);
 
-$('input#tmonth').click(function(){
+var updateTotals = function(){
 	$.post("/getTotals/", { month: tmonth, year: tyear}, function(data){
-		totals = JSON.parse(data);
+		obj = JSON.parse(data);
+		for(var i =0; i <airports.length;i++){
+			totals[airports[i]] = obj[airports[i]];
+		}
+		console.log(JSON.parse(data));
 	});
-});
+}
+
+$('input#tmonth').click(updateTotals);
+$('input#tyear').click(updateTotals);
 
 
 var createCircle = function (x,y,r,airport) {
@@ -100,9 +108,8 @@ var initCircles = function(){
 	for(var i =0; i <airports.length;i++){
 		console.log(airports[i]);
 		console.log(totals[airports[i]]);
-		c = createCircle(coordinates[i][0],coordinates[i][1],totals[airports[i]],airports[i])
+		c = createCircle(coordinates[i][0],coordinates[i][1],totals[airports[i]] / 100 ,airports[i])
 		totalscontainer.appendChild(c);
-		i+=1;
 	}
 }
 var clear = function(e) {
