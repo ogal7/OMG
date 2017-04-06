@@ -38,7 +38,7 @@ var update = function(){
 	tmonth = tmonthval.innerHTML = tmonthslider.value;
 	dyear = dyearval.innerHTML = dyearslider.value;
 	dmonth = dmonthval.innerHTML = dmonthslider.value;
-	clear();
+	clear1();
 	initCircles();
 }
 
@@ -112,6 +112,15 @@ var initCircles = function(){
 		totalscontainer.appendChild(c);
 	}
 }
+
+var clear1 = function(e) {
+	var list =totalscontainer.childNodes;
+    while (list.length != 0) {
+		totalscontainer.removeChild(list[0]);
+    }
+}
+
+
 var clear = function(e) {
     var list =totalscontainer.childNodes;
     while (list.length != 0) {
